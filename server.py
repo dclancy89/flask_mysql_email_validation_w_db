@@ -53,6 +53,16 @@ def logout():
 	session.clear()
 	return redirect('/')
 
+@app.route('/delete/<id>')
+def delete(id):
+	query = 'DELETE FROM email_addresses WHERE id=:id'
+	data = {'id': id}
+
+	mysql.query_db(query, data)
+	flash('Email deleted.', 'error')
+
+	return redirect('/success')
+
 
 app.run(debug=True)
 
