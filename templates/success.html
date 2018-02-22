@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Success!</title>
+	<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+
+	<div id="container">
+		<div class="messages">
+		{% with messages = get_flashed_messages(with_categories=true) %}
+			{% if messages %}
+				<ul>
+				{% for category, message in messages %}
+					<li class="{{ category }}">{{ message }}</li>
+				{% endfor %}
+				</ul>
+			{% endif %}
+		{% endwith %}
+		</div>
+		<div class="content">
+			<h1>Email Addresses Entered</h1>
+			{% for address in addresses %}
+			<p>{{ address['email'] }} <span class="date">{{ address['date'] }}</span><a href="/delete/{{ address['id'] }}" class="delete">Delete</a></p>
+			{% endfor %}
+			<a href="/logout" class="button">Log Out</a>
+		</div>
+	</div>
+</body>
+</html>
